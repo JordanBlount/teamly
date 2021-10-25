@@ -1,10 +1,13 @@
 package com.jordanblount.teamly.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +30,9 @@ public class Team {
     @Column(name = "org_id")
     private int orgId;
 
+    @OneToMany(mappedBy = "team")
+    private List<Member> members;
+
     public Team() {
 
     }
@@ -36,7 +42,7 @@ public class Team {
         this.teamName = teamName;
         this.teamLeader = teamLeader;
         this.teamType = teamType;
-        this.orgId = orgId;
+        this.orgId = orgId; 
     }
 
     public long getId() {

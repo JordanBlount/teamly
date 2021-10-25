@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -30,8 +31,9 @@ public class Member {
     @Column(name = "job_position")
     private String jobPosition;
 
-    @Column(name = "team_id")
-    private int teamId;
+    // //@Column(name = "team_id")
+    // @ManyToOne
+    // private Team teamId;
 
     @Column(name = "start_date")
     private Timestamp startDate;
@@ -57,6 +59,9 @@ public class Member {
     @Column(name = "complete_name")
     private String completeName;
 
+    @ManyToOne
+    private Team team;
+
     public Member() {
 
     }
@@ -67,7 +72,7 @@ public class Member {
         this.lastName = lastName;
         this.address = address;
         this.jobPosition = jobPosition;
-        this.teamId = teamId;
+        //this.teamId = teamId;
         this.startDate = startDate;
         this.isRemote = isRemote;
         this.location = location;
@@ -118,13 +123,13 @@ public class Member {
         this.jobPosition = jobPosition;
     }
 
-    public int getTeamId() {
-        return this.teamId;
-    }
+    // public int getTeamId() {
+    //     return this.teamId;
+    // }
 
-    public void setTeamId(int teamId) {
-        this.teamId = teamId;
-    }
+    // public void setTeamId(int teamId) {
+    //     this.teamId = teamId;
+    // }
 
     public Timestamp getStartDate() {
         return this.startDate;
@@ -202,12 +207,12 @@ public class Member {
             return false;
         }
         Member member = (Member) o;
-        return id == member.id && Objects.equals(firstName, member.firstName) && Objects.equals(lastName, member.lastName) && Objects.equals(address, member.address) && Objects.equals(jobPosition, member.jobPosition) && teamId == member.teamId && Objects.equals(startDate, member.startDate) && isRemote == member.isRemote && Objects.equals(location, member.location) && Objects.equals(nativeLanguage, member.nativeLanguage) && Objects.equals(profileImg, member.profileImg) && Objects.equals(teamPosition, member.teamPosition) && phoneNumber == member.phoneNumber && Objects.equals(completeName, member.completeName);
+        return id == member.id && Objects.equals(firstName, member.firstName) && Objects.equals(lastName, member.lastName) && Objects.equals(address, member.address) && Objects.equals(jobPosition, member.jobPosition) && Objects.equals(startDate, member.startDate) && isRemote == member.isRemote && Objects.equals(location, member.location) && Objects.equals(nativeLanguage, member.nativeLanguage) && Objects.equals(profileImg, member.profileImg) && Objects.equals(teamPosition, member.teamPosition) && phoneNumber == member.phoneNumber && Objects.equals(completeName, member.completeName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, address, jobPosition, teamId, startDate, isRemote, location, nativeLanguage, profileImg, teamPosition, phoneNumber, completeName);
+        return Objects.hash(id, firstName, lastName, address, jobPosition, startDate, isRemote, location, nativeLanguage, profileImg, teamPosition, phoneNumber, completeName);
     }
 
     @Override
@@ -218,7 +223,7 @@ public class Member {
             ", lastName='" + getLastName() + "'" +
             ", address='" + getAddress() + "'" +
             ", jobPosition='" + getJobPosition() + "'" +
-            ", teamId='" + getTeamId() + "'" +
+           // ", teamId='" + getTeamId() + "'" +
             ", startDate='" + getStartDate() + "'" +
             ", isRemote='" + isIsRemote() + "'" +
             ", location='" + getLocation() + "'" +
