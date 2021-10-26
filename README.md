@@ -5,7 +5,7 @@ A CRM for managing your teams.
 
 ## Tech Stack
 
-**Client:** React, Redux, React Router
+**Client:** React, Redux, React Router, React Helmet, Material UI
 
 **Server:** Sprint Boot
 
