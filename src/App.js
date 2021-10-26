@@ -1,4 +1,5 @@
 import DashboardLayout from './components/DashboardLayout';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './App.css';
 
@@ -27,9 +28,11 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div className="app">
-        <DashboardLayout />
-      </div>
+      <Router>
+        <div className="app">
+          <DashboardLayout />
+        </div>
+      </Router>
     </ThemeProvider>
   );
 }
