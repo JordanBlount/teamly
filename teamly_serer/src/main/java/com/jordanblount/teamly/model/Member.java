@@ -31,10 +31,6 @@ public class Member {
     @Column(name = "job_position")
     private String jobPosition;
 
-    // //@Column(name = "team_id")
-    // @ManyToOne
-    // private Team teamId;
-
     @Column(name = "start_date")
     private Timestamp startDate;
 
@@ -66,13 +62,12 @@ public class Member {
 
     }
 
-    public Member(long id, String firstName, String lastName, String address, String jobPosition, int teamId, Timestamp startDate, boolean isRemote, String location, String nativeLanguage, String profileImg, String teamPosition, int phoneNumber, String completeName) {
+    public Member(long id, String firstName, String lastName, String address, String jobPosition, Timestamp startDate, boolean isRemote, String location, String nativeLanguage, String profileImg, String teamPosition, int phoneNumber, String completeName, Team team) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.jobPosition = jobPosition;
-        //this.teamId = teamId;
         this.startDate = startDate;
         this.isRemote = isRemote;
         this.location = location;
@@ -81,6 +76,7 @@ public class Member {
         this.teamPosition = teamPosition;
         this.phoneNumber = phoneNumber;
         this.completeName = completeName;
+        this.team = team;
     }
 
     public long getId() {
@@ -122,14 +118,6 @@ public class Member {
     public void setJobPosition(String jobPosition) {
         this.jobPosition = jobPosition;
     }
-
-    // public int getTeamId() {
-    //     return this.teamId;
-    // }
-
-    // public void setTeamId(int teamId) {
-    //     this.teamId = teamId;
-    // }
 
     public Timestamp getStartDate() {
         return this.startDate;
@@ -199,6 +187,15 @@ public class Member {
         this.completeName = completeName;
     }
 
+    public Team getTeam() {
+        return this.team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -207,12 +204,12 @@ public class Member {
             return false;
         }
         Member member = (Member) o;
-        return id == member.id && Objects.equals(firstName, member.firstName) && Objects.equals(lastName, member.lastName) && Objects.equals(address, member.address) && Objects.equals(jobPosition, member.jobPosition) && Objects.equals(startDate, member.startDate) && isRemote == member.isRemote && Objects.equals(location, member.location) && Objects.equals(nativeLanguage, member.nativeLanguage) && Objects.equals(profileImg, member.profileImg) && Objects.equals(teamPosition, member.teamPosition) && phoneNumber == member.phoneNumber && Objects.equals(completeName, member.completeName);
+        return id == member.id && Objects.equals(firstName, member.firstName) && Objects.equals(lastName, member.lastName) && Objects.equals(address, member.address) && Objects.equals(jobPosition, member.jobPosition) && Objects.equals(team, member.team) && Objects.equals(startDate, member.startDate) && isRemote == member.isRemote && Objects.equals(location, member.location) && Objects.equals(nativeLanguage, member.nativeLanguage) && Objects.equals(profileImg, member.profileImg) && Objects.equals(teamPosition, member.teamPosition) && phoneNumber == member.phoneNumber && Objects.equals(completeName, member.completeName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, address, jobPosition, startDate, isRemote, location, nativeLanguage, profileImg, teamPosition, phoneNumber, completeName);
+        return Objects.hash(id, firstName, lastName, address, jobPosition, team, startDate, isRemote, location, nativeLanguage, profileImg, teamPosition, phoneNumber, completeName);
     }
 
     @Override
@@ -223,7 +220,7 @@ public class Member {
             ", lastName='" + getLastName() + "'" +
             ", address='" + getAddress() + "'" +
             ", jobPosition='" + getJobPosition() + "'" +
-           // ", teamId='" + getTeamId() + "'" +
+            ", team='" + getTeam() + "'" +
             ", startDate='" + getStartDate() + "'" +
             ", isRemote='" + isIsRemote() + "'" +
             ", location='" + getLocation() + "'" +

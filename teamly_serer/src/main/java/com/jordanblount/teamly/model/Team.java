@@ -1,13 +1,10 @@
 package com.jordanblount.teamly.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -22,27 +19,35 @@ public class Team {
     private String teamName;
 
     @Column(name = "team_leader")
-    private String teamLeader;
+    private int teamLeader;
+
+    @Column(name = "team_description")
+    private String teamDescription;
     
     @Column(name = "team_type")
-    private String teamType;
+    private int teamType;
     
     @Column(name = "org_id")
     private int orgId;
 
-    @OneToMany(mappedBy = "team")
-    private List<Member> members;
+    // @OneToMany
+    // @JoinTable(name = "teams_members",
+    //     joinColumns = @JoinColumn(name = "team_id", referencedColumnName = "id"),
+    //     inverseJoinColumns = @JoinColumn(name = "member_id", referencedColumnName = "id"))
+    // private List<Member> members;
 
     public Team() {
 
     }
 
-    public Team(String teamName, String teamLeader, String teamType, int orgId) {
+    public Team(String teamName, int teamLeader, String teamDescription, int teamType, int orgId) {
         super();
         this.teamName = teamName;
         this.teamLeader = teamLeader;
+        this.teamDescription = teamDescription;
         this.teamType = teamType;
         this.orgId = orgId; 
+        //this.members = members;
     }
 
     public long getId() {
@@ -61,28 +66,45 @@ public class Team {
         this.teamName = teamName;
     }
 
-    public String getTeamLeader() {
+    public int getTeamLeader() {
         return this.teamLeader;
     }
 
-    public void setTeamLeader(String teamLeader) {
+    public void setTeamLeader(int teamLeader) {
         this.teamLeader = teamLeader;
     }
 
-    public String getTeamType() {
+    public String getTeamDescription() {
+        return this.teamDescription;
+    }
+
+    public void setTeamDescription(String teamDescription) {
+        this.teamDescription = teamDescription;
+    }
+
+    public int getTeamType() {
         return this.teamType;
     }
 
-    public void setTeamType(String teamType) {
+    public void setTeamType(int teamType) {
         this.teamType = teamType;
     }
 
-    public int getOrgIdid() {
+    public int getOrgId() {
         return this.orgId;
     }
 
-    public void setOrgIdid(int orgId) {
+    public void setOrgId(int orgId) {
         this.orgId = orgId;
     }
+
+    // public List<Member> getMembers() {
+    //     return this.members;
+    // }
+
+    // public void setMembers(List<Member> members) {
+    //     this.members = members;
+    // }
+
   
 }
