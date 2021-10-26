@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -41,7 +40,7 @@ public class Member {
     private String location;
 
     @Column(name = "native_language")
-    private String nativeLanguage;
+    private int nativeLanguage;
 
     @Column(name = "profile_img")
     private String profileImg;
@@ -55,14 +54,20 @@ public class Member {
     @Column(name = "complete_name")
     private String completeName;
 
-    @ManyToOne
-    private Team team;
+    // @ManyToOne
+    // private Team team;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "team_id")
+    private Long teamId;
 
     public Member() {
 
     }
 
-    public Member(long id, String firstName, String lastName, String address, String jobPosition, Timestamp startDate, boolean isRemote, String location, String nativeLanguage, String profileImg, String teamPosition, int phoneNumber, String completeName, Team team) {
+    public Member(long id, String firstName, String lastName, String address, String jobPosition, Timestamp startDate, boolean isRemote, String location, int nativeLanguage, String profileImg, String teamPosition, int phoneNumber, String completeName, String email, Long teamId) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
@@ -76,7 +81,9 @@ public class Member {
         this.teamPosition = teamPosition;
         this.phoneNumber = phoneNumber;
         this.completeName = completeName;
-        this.team = team;
+        //this.team = team;
+        this.email = email;
+        this.teamId = teamId;
     }
 
     public long getId() {
@@ -147,11 +154,11 @@ public class Member {
         this.location = location;
     }
 
-    public String getNativeLanguage() {
+    public int getNativeLanguage() {
         return this.nativeLanguage;
     }
 
-    public void setNativeLanguage(String nativeLanguage) {
+    public void setNativeLanguage(int nativeLanguage) {
         this.nativeLanguage = nativeLanguage;
     }
 
@@ -175,7 +182,7 @@ public class Member {
         return this.phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -187,14 +194,29 @@ public class Member {
         this.completeName = completeName;
     }
 
-    public Team getTeam() {
-        return this.team;
+    // public Team getTeam() {
+    //     return this.team;
+    // }
+
+    // public void setTeam(Team team) {
+    //     this.team = team;
+    // }
+
+    public String getEmail() {
+        return this.email;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
+    public Long getTeamId() {
+        return this.teamId;
+    }
+
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -204,12 +226,12 @@ public class Member {
             return false;
         }
         Member member = (Member) o;
-        return id == member.id && Objects.equals(firstName, member.firstName) && Objects.equals(lastName, member.lastName) && Objects.equals(address, member.address) && Objects.equals(jobPosition, member.jobPosition) && Objects.equals(team, member.team) && Objects.equals(startDate, member.startDate) && isRemote == member.isRemote && Objects.equals(location, member.location) && Objects.equals(nativeLanguage, member.nativeLanguage) && Objects.equals(profileImg, member.profileImg) && Objects.equals(teamPosition, member.teamPosition) && phoneNumber == member.phoneNumber && Objects.equals(completeName, member.completeName);
+        return id == member.id && Objects.equals(firstName, member.firstName) && Objects.equals(lastName, member.lastName) && Objects.equals(address, member.address) && Objects.equals(jobPosition, member.jobPosition) && Objects.equals(startDate, member.startDate) && isRemote == member.isRemote && Objects.equals(location, member.location) && Objects.equals(nativeLanguage, member.nativeLanguage) && Objects.equals(profileImg, member.profileImg) && Objects.equals(teamPosition, member.teamPosition) && phoneNumber == member.phoneNumber && Objects.equals(completeName, member.completeName) && Objects.equals(email, member.email) && Objects.equals(teamId, member.teamId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, address, jobPosition, team, startDate, isRemote, location, nativeLanguage, profileImg, teamPosition, phoneNumber, completeName);
+        return Objects.hash(id, firstName, lastName, address, jobPosition, startDate, isRemote, location, nativeLanguage, profileImg, teamPosition, phoneNumber, completeName, email, teamId);
     }
 
     @Override
@@ -220,7 +242,7 @@ public class Member {
             ", lastName='" + getLastName() + "'" +
             ", address='" + getAddress() + "'" +
             ", jobPosition='" + getJobPosition() + "'" +
-            ", team='" + getTeam() + "'" +
+            //", team='" + getTeam() + "'" +
             ", startDate='" + getStartDate() + "'" +
             ", isRemote='" + isIsRemote() + "'" +
             ", location='" + getLocation() + "'" +
@@ -229,6 +251,9 @@ public class Member {
             ", teamPosition='" + getTeamPosition() + "'" +
             ", phoneNumber='" + getPhoneNumber() + "'" +
             ", completeName='" + getCompleteName() + "'" +
+            //", team='" + getTeam() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", email='" + getTeamId() + "'" +
             "}";
     }
 }

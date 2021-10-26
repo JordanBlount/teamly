@@ -1,5 +1,4 @@
 import React from 'react';
-import Typography from '@mui/material/Typography';
 import Grid from "@mui/material/Grid";
 
 import TeamCard from '../components/TeamCard';
@@ -9,7 +8,7 @@ import Heading from '../components/Heading';
 const Team = () => {
     return (
         <div class="page team">
-            <Heading name="Employees" />
+            <Heading name="Teams" />
             <Grid container spacing={3}>
                 <Grid item xs="auto">
                     <TeamCard name={"Front-end Developers"}/>

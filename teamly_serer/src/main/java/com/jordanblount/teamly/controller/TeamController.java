@@ -96,7 +96,7 @@ public class TeamController {
 	}
 
     // Delete
-    @DeleteMapping("/")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Team> deleteTeam(@PathVariable long id) {
         try {
             teamRepository.deleteById(id);
