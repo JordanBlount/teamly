@@ -8,6 +8,7 @@ import EmployeeTab from '../tabs/EmployeeTab';
 
 import Team from '../pages/Team';
 import Employee from '../pages/Employee';
+import TeamForm from '../pages/TeamForm';
 
 const Dashboard = () => {
 
@@ -21,9 +22,12 @@ const Dashboard = () => {
                 <Route exact path="/">
                     <TeamTab all={true}/>
                 </Route>
-                <Route path='/teams/:id'>
+                <Route path='/teams/:id/'>
                     {/* TODO: Add the individual team page here. */}
                     <Team/>
+                </Route>
+                <Route path="/newTeam">
+                    <TeamForm />
                 </Route>
                 <Route exact path="/employees">
                     <EmployeeTab all={true}/>

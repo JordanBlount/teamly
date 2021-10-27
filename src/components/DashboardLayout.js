@@ -16,9 +16,11 @@ import Dashboard from './Dashboard';
 import Helmet from 'react-helmet';
 
 import MenuIcon from '@mui/icons-material/Menu';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import Logo from '../resources/logo.svg';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import ApiServices from '../services/ApiServices';
 
 const drawerWidth = 240;
@@ -29,6 +31,7 @@ function DashboardLayout(props) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [organization, setOrganization] = useState([]);
 
+  const location = useLocation();
   const history = useHistory();
 
   const handleDrawerToggle = () => {
@@ -40,6 +43,41 @@ function DashboardLayout(props) {
       setOrganization(response.data);
     });
   }, []);
+
+  useEffect(() => {
+    console.log(location.pathname);
+  }, [location.pathname]);
+
+  function MenuItem(props) {
+    if (location.pathname === "/") {
+      return (
+        <IconButton
+          onClick={() => history.push('/newTeam')}
+        >
+          <AddCircleIcon sx={{ width: 32, height: 32, color: "white" }} />
+        </IconButton>
+      )
+    }
+    if (location.pathname.includes('/teams/')) {
+      return (
+        <IconButton
+          onClick={() => console.log("This is working")}
+        >
+          <MoreVertIcon sx={{ width: 28, height: 28, color: "white" }} />
+        </IconButton>
+      )
+    }
+    if (location.pathname === "/employees") {
+      return (
+        <IconButton
+          onClick={() => console.log("This is working")}
+        >
+          <AddCircleIcon sx={{ width: 32, height: 32, color: "white" }} />
+        </IconButton>
+      )
+    }
+    return null
+  }
 
   const drawer = (
     <div>
@@ -113,6 +151,7 @@ function DashboardLayout(props) {
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, fontWeight: "medium" }}>
             {organization.name}
           </Typography>
+          <MenuItem />
         </Toolbar>
       </AppBar>
       <Box

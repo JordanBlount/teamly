@@ -46,10 +46,17 @@ function TeamCard(props) {
         }
     }
 
+    // x={{ minWidth: 275, maxWidth: 275 }}
     return (
         // This sets the minimum width of a card. The means our cards can never get bigger than this.
-        <Card sx={{ minWidth: 275, maxWidth: 275 }}>
-            <CardActionArea>
+        // Wrapped the click area out the card to make the whole thing
+        // clickable. 
+        // NOTE: This is just for demo purposes
+        <CardActionArea
+            onClick={() => history.push(`/teams/${props.team.id}`)}
+            >
+        {/* Add a height of 240. NOTE: For demo purposes */}
+        <Card sx={{ height: 240 }}> 
             <CardHeader
                 avatar={
                     <Avatar sx={{ bgcolor: getColor(props.team.teamType) }} aria-label="teamLeaderIcon">
@@ -74,7 +81,6 @@ function TeamCard(props) {
                 title={props.team.teamDescription}
                 subheader={props.team.teamName}
             />
-            </CardActionArea>
             {/* <CardContent>
                 <Typography sx={{ fontSize: 14, textAlign: 'center' }} color="text.secondary" gutterBottom>
                     Members: {props.team.teamDescription}
@@ -90,6 +96,7 @@ function TeamCard(props) {
                 <Button size="small" onClick={() => history.push(`/teams/${props.team.id}`)}>More</Button>
             </CardActions> */}
         </Card>
+        </CardActionArea>
     );
 }
 

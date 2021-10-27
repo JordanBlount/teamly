@@ -17,7 +17,7 @@ class ApiServices {
     }
     
     getTeamById = (id) => {
-        return axios.get(`${TEAMS_REST_API_URL}${id}`)
+        return axios.get(`${TEAMS_REST_API_URL}/${id}`)
     }
 
     getTeamByName = (name) => {
