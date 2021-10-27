@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import Grid from "@mui/material/Grid";
+import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
 
 import TeamCard from '../components/TeamCard';
 import Heading from '../components/Heading';
 import ApiServices from '../services/ApiServices';
-
 
 const TeamTab = (props) => {
 
@@ -21,7 +22,7 @@ const TeamTab = (props) => {
             <Heading name="Teams" />
             <Grid container spacing={3}>
                 {teams.map((team) => (
-                    <Grid item xs="auto">
+                    <Grid item xs={12} md={6} lg ={4}>
                         <TeamCard team={team} />
                     </Grid>
                 ))}
