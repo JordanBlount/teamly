@@ -46,7 +46,7 @@ function DashboardLayout(props) {
       {/* TODO: Remove this "Toolbar" componenet and replace it with the app title on large
                       screen sizes. */}
       <Toolbar>
-        Jordan Blount
+        Administrator
         {/* 
         Teamly Logo
       */}
@@ -63,7 +63,7 @@ function DashboardLayout(props) {
           </ListItemIcon>
           <ListItemText primary={"Teams"} />
         </ListItemButton>
-        <ListItemButton key={"Employees"} onClick={() => history.push("/employees")}> 
+        <ListItemButton key={"Employees"} onClick={() => history.push("/employees")}>
           <ListItemIcon sx={{ minWidth: '32px' }}>
             <svg width='20' height='20' xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
@@ -80,7 +80,8 @@ function DashboardLayout(props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <Helmet>
-        <title>StrongBuilt - Teamly</title>
+        {/* Dynamically set the page title */}
+        <title>{`${organization.name}`} - Teamly</title>
       </Helmet>
       <CssBaseline />
       <AppBar
