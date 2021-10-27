@@ -4,22 +4,25 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { useHistory } from 'react-router';
 
 function TeamCard(props) {
+
+    const history = useHistory();
 
     return (
         // This sets the minimum width of a card. The means our cards can never get bigger than this.
         <Card sx={{ minWidth: 275 }}>
             <CardContent>
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                    {props.name}
+                    {props.team.teamDescription}
                 </Typography>
                 <Typography variant="body2">
-                    Team Leader: Jordan Blount
+                    Team Leader: {props.team.teamLeader}
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small">More</Button>
+                <Button size="small" onClick={() => history.push(`/teams/${props.team.id}`)}>More</Button>
             </CardActions>
         </Card>
     );

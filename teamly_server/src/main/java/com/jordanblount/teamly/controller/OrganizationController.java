@@ -16,18 +16,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("api/v1/organizations/")
+@RequestMapping("api/v1/organizations")
 public class OrganizationController {
     
     @Autowired
     private OrganizationRepository organizationRepository;
 
-    @GetMapping("all")
+    @GetMapping("/all")
     public List<Organization> getOrganizations() {
         return this.organizationRepository.findAll();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Organization> getOrganizationById(@PathVariable Long id) {
        Organization organization = organizationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("This organization was not found."));
        return ResponseEntity.ok(organization);

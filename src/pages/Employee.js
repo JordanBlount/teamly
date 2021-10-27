@@ -1,18 +1,24 @@
-import { useEffect } from 'react';
-import Typography from '@mui/material/Typography';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-import Heading from '../components/Heading';
+import ApiServices from '../services/ApiServices';
 
 const Employee = () => {
 
+    const params = useParams();
+
+    const [employee, setEmployee] = useState([]);
+
     useEffect(() => {
-        // Make sure that the data is displayed here!
+        ApiServices.getMemberById(params.id).then((response) => {
+            console.log(response.data);
+            setEmployee(response.data);
+        });
     }, []);
 
     return (
-        <div className="page employee">
-            <Heading name="Employees" />
-            <p>Test</p>
+        <div>
+            {employee.firstName}
         </div>
     );
 };

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import AppBar from '@mui/material/AppBar';
@@ -19,6 +19,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 import Logo from '../resources/logo.svg';
 import { useHistory } from 'react-router';
+import ApiServices from '../services/ApiServices';
 
 const drawerWidth = 240;
 
@@ -26,12 +27,19 @@ function DashboardLayout(props) {
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [organization, setOrganization] = useState([]);
 
   const history = useHistory();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  useEffect(() => {
+    ApiServices.getOrganizationById(1).then((response) => {
+      setOrganization(response.data);
+    });
+  }, []);
 
   const drawer = (
     <div>
@@ -102,7 +110,7 @@ function DashboardLayout(props) {
                       Appbar title
                     */}
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, fontWeight: "medium" }}>
-            Teamly
+            {organization.name}
           </Typography>
         </Toolbar>
       </AppBar>

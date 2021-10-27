@@ -46,7 +46,7 @@ public class TeamController {
         return this.teamRepository.findAll();
     }
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Team> getTeamById(@PathVariable Long id) {
         Team team = teamRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("This team was not found."));
