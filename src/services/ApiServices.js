@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const TEAMS_REST_API_URL = 'http://localhost:8080/api/v1/teams/';
-const MEMBERS_REST_API_URL = 'http://localhost:8080/api/v1/members/';
-const ORGANIZATIONS_REST_API_URL = 'http://localhost:8080/api/v1/organizations/';
+const TEAMS_REST_API_URL = 'http://localhost:8080/api/v1/teams';
+const MEMBERS_REST_API_URL = 'http://localhost:8080/api/v1/members';
+const ORGANIZATIONS_REST_API_URL = 'http://localhost:8080/api/v1/organizations';
 
 class ApiServices {
 
@@ -17,7 +17,7 @@ class ApiServices {
     }
     
     getTeamById = (id) => {
-        return axios.get(`${TEAMS_REST_API_URL}/${id}`)
+        return axios.get(`${TEAMS_REST_API_URL}${id}`)
     }
 
     getTeamByName = (name) => {

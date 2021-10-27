@@ -3,8 +3,8 @@ import { Switch, Route, useParams, useHistory } from 'react-router-dom';
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar';
 
-import TeamTab from '../pages/TeamTab';
-import EmployeeTab from '../pages/EmployeeTab';
+import TeamTab from '../tabs/TeamTab';
+import EmployeeTab from '../tabs/EmployeeTab';
 
 import Team from '../pages/Team';
 import Employee from '../pages/Employee';

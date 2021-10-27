@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom'
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,17 +9,21 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Heading from '../components/Heading';
 
+import ApiServices from '../services/ApiServices';
+
 const EmployeeTab = () => {
 
-    set [members, setMembers] = useState([]);
+    const params = useParams();
+
+    const [members, setMembers] = useState([]);
+    const [tableData, setTableData] = useState([]);
 
     useEffect(() => {
-        ApiServices.getMembersByTeamId(params.id).then((response) => {
+        ApiServices.getMembers().then((response) => {
             console.log(response.data);
             setMembers(response.data);
         });
     }, []);
-
 
     return (
         <div className="page employee">
@@ -29,13 +34,11 @@ const EmployeeTab = () => {
                         <TableRow>
                             <TableCell>Name</TableCell>
                             <TableCell align="right">Position</TableCell>
-                            <TableCell align="right">Location</TableCell>
-                            <TableCell align="right">Phone</TableCell>
                             <TableCell align="right">Team</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
+                        {tableData.map((row) => (
                             <TableRow
                                 key={row.name}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -43,10 +46,8 @@ const EmployeeTab = () => {
                                 <TableCell component="th" scope="row">
                                     {row.name}
                                 </TableCell>
-                                <TableCell align="right">{row.calories}</TableCell>
-                                <TableCell align="right">{row.fat}</TableCell>
-                                <TableCell align="right">{row.carbs}</TableCell>
-                                <TableCell align="right">{row.protein}</TableCell>
+                                <TableCell align="right">{row.position}</TableCell>
+                                <TableCell align="right">{row.team}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
