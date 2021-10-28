@@ -9,6 +9,9 @@ import EmployeeTab from '../tabs/EmployeeTab';
 import Team from '../pages/Team';
 import Employee from '../pages/Employee';
 import TeamForm from '../pages/TeamForm';
+import EmployeeForm from '../pages/EmployeeForm';
+import EmployeeEdit from '../pages/EmployeeEdit';
+import { TrainOutlined } from '@mui/icons-material';
 
 const Dashboard = () => {
 
@@ -27,7 +30,10 @@ const Dashboard = () => {
                     <Team/>
                 </Route>
                 <Route path="/newTeam">
-                    <TeamForm />
+                    <TeamForm edit={false}/>
+                </Route>
+                <Route path="/editTeam">
+                    <TeamForm edit={true}/>
                 </Route>
                 <Route exact path="/employees">
                     <EmployeeTab all={true}/>
@@ -35,6 +41,12 @@ const Dashboard = () => {
                 <Route path='/employees/:id'>
                     {/* TODO: Add my individual employee page here. */}
                     <Employee />
+                </Route>
+                <Route path="/newEmployee">
+                    <EmployeeForm edit={false}/>
+                </Route>
+                <Route path="/editEmployee/:id">
+                    <EmployeeEdit />
                 </Route>
             </Switch>
         </Box>

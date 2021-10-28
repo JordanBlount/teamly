@@ -1,19 +1,121 @@
-import { Paper } from '@mui/material';
+import { Button, Paper, TextField } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import Grid from "@mui/material/Grid";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Select from '@mui/material/Select';
 import { Box } from '@mui/system';
-import { useState, useParams } from 'react';
+import React, { useState, useParams, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Heading from '../components/Heading';
+import { Controller, useForm } from 'react-hook-form';
+import timestamp from 'time-stamp';
+
+import ApiServices from '../services/ApiServices';
 
 const TeamForm = () => {
 
-    const [formData, setFormData] = useState([]);
+    const defaultValues = {
+        teamName: "",
+        teamDescription: "",
+        teamType: "",
+        teamLeader: ""
+    }
+
+    const { reigster, handleSubmit, control } = useForm({ defaultValues });
+
+    const history = useHistory();
+    const [members, setMembers] = useState([]);
+
+    const onSubmit = (data) => {
+        data.orgId = 1;
+        ApiServices.createTeam(data).then((response) => {
+            history.push("/")
+        });
+    }
+
+    useEffect(() => {
+        ApiServices.getMembers().then((response) => {
+            setMembers(response.data)
+        });
+    }, []);
+
+    const teamTypes = [1, 2, 4, 3, 5];
+    const teamTypesNames = ["Software Engineer", "UI Design", "Backend Developers", "Human Resoures", "Directors"];
 
     return (
         <div className="page teamForm">
-            <Heading name="New Team"/>
             <Paper>
-                <Box p={3}>
-                    
+                <Box sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                }}
+                >
+                    <Typography component="h1" variant="h5" sx={{ mt: 3 }}>
+                        New Team
+                    </Typography>
+                    {/* onSubmit={handleSubmit} */}
+                    <Box component="form" noValidate p={3}>
+                        <Grid container spacing={2} >
+                            <Grid item xs={12} sm={6}>
+                                <Controller
+                                    name={"teamName"}
+                                    control={control}
+                                    render={({ field: { onChange, value } }) => (
+                                        <TextField required fullWidth onChange={onChange} value={value} label={"Team Name"} />
+                                    )}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <Controller
+                                    name={"teamLeader"}
+                                    control={control}
+                                    render={({ field: { onChange, value } }) => (
+                                        <TextField select fullWidth onChange={onChange} value={value} label={"Team Leader"} >
+                                            {
+                                                members.map((member, index) => (
+                                                    <MenuItem key={index} value={member.id}>
+                                                        {`${member.firstName} ${member.lastName}`}
+                                                    </MenuItem>
+                                                ))
+                                            }
+                                        </TextField>
+                                    )}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <Controller
+                                    name={"teamDescription"}
+                                    control={control}
+                                    render={({ field: { onChange, value } }) => (
+                                        <TextField fullWidth onChange={onChange} value={value} label={"Team Description"} />
+                                    )}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <Controller
+                                    name={"teamType"}
+                                    control={control}
+                                    render={({ field: { onChange, value } }) => (
+                                        <TextField select fullWidth onChange={onChange} value={value} label={"Team Type"} >
+                                            {
+                                                teamTypes.map((type, index) => (
+                                                    <MenuItem key={index} value={type}>
+                                                        {`${teamTypesNames[index]}`}
+                                                    </MenuItem>
+                                                ))
+                                            }
+                                        </TextField>
+                                    )}
+                                />
+                            </Grid>
+                        </Grid>
+                        <Button fullWidth onClick={handleSubmit(onSubmit)} variant="contained" sx={{ mt: 2, mb: 2 }}>Submit</Button>
+                    </Box>
                 </Box>
             </Paper>
         </div>

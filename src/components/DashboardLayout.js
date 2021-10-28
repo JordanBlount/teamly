@@ -18,6 +18,7 @@ import Helmet from 'react-helmet';
 import MenuIcon from '@mui/icons-material/Menu';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import EditIcon from '@mui/icons-material/Edit';
 
 import Logo from '../resources/logo.svg';
 import { useHistory, useLocation } from 'react-router';
@@ -39,14 +40,19 @@ function DashboardLayout(props) {
   };
 
   useEffect(() => {
-    ApiServices.getOrganizationById(1).then((response) => {
-      setOrganization(response.data);
+    // ApiServices.getOrganizationById(1).then((response) => {
+    //   setOrganization(response.data);
+    // });
+    // NOTE: This needs to be changed at some point. It is default data
+    setOrganization({
+      id: 1,
+      name: 'StrongBuilt'
     });
   }, []);
 
-  useEffect(() => {
-    console.log(location.pathname);
-  }, [location.pathname]);
+  // useEffect(() => {
+  //   console.log(location.pathname);
+  // }, [location.pathname]);
 
   function MenuItem(props) {
     if (location.pathname === "/") {
@@ -61,18 +67,29 @@ function DashboardLayout(props) {
     if (location.pathname.includes('/teams/')) {
       return (
         <IconButton
-          onClick={() => console.log("This is working")}
+          onClick={() => history.push('/editTeam')}
         >
-          <MoreVertIcon sx={{ width: 28, height: 28, color: "white" }} />
+          <EditIcon sx={{ width: 28, height: 28, color: "white" }} />
+          {/* <MoreVertIcon sx={{ width: 28, height: 28, color: "white" }} /> */}
         </IconButton>
       )
     }
     if (location.pathname === "/employees") {
       return (
         <IconButton
-          onClick={() => console.log("This is working")}
+          onClick={() => history.push("/newEmployee")}
         >
           <AddCircleIcon sx={{ width: 32, height: 32, color: "white" }} />
+        </IconButton>
+      )
+    }
+    if (location.pathname.includes('/employees/')) {
+      return (
+        <IconButton
+          onClick={() => history.push(`/editEmployee/${location.pathname.substring(location.pathname.lastIndexOf("/") + 1)}`)}
+        >
+          <EditIcon sx={{ width: 28, height: 28, color: "white" }} />
+          {/* <MoreVertIcon sx={{ width: 28, height: 28, color: "white" }} /> */}
         </IconButton>
       )
     }
@@ -119,7 +136,7 @@ function DashboardLayout(props) {
     <Box sx={{ display: 'flex' }}>
       <Helmet>
         {/* Dynamically set the page title */}
-        <title>{`${organization.name}`} - Teamly</title>
+        <title>{organization.name !== undefined ? `${organization.name} - Teamly` : "Teamly"}</title>
       </Helmet>
       <CssBaseline />
       <AppBar
@@ -143,13 +160,13 @@ function DashboardLayout(props) {
           {/* 
                       Teamly Logo
                     */}
-          <img src={Logo} alt='Teamly Logo' className='logo' width='32' height='32' style={{ marginRight: '1.5rem' }} />
+          <img src={Logo} alt='Teamly Logo' className='logo' width='32' height='32' style={{ marginRight: '1.25rem' }} />
 
           {/*
                       Appbar title
                     */}
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, fontWeight: "medium" }}>
-            {organization.name}
+            { organization.name !== undefined ? organization.name : "Teamly"}
           </Typography>
           <MenuItem />
         </Toolbar>

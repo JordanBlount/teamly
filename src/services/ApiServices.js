@@ -59,7 +59,7 @@ class ApiServices {
     }
 
     updateMember(id, member) {
-        return axios.put(`${MEMBERS_REST_API_URL}/${id}`)
+        return axios.put(`${MEMBERS_REST_API_URL}/${id}`, member)
     }
 
     deleteMember(id) {
