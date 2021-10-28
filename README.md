@@ -1,11 +1,10 @@
 # Teamly
 
-A CRM for managing your teams.
-
+A CRM for managing your teams. 
 
 ## Tech Stack
 
-**Client:** React, Redux, React Router, React Helmet, Material UI
+**Client:** React, Redux, React Helmet, React Form Hooks, Material UI
 
 **Server:** Sprint Boot
 
