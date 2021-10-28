@@ -2,6 +2,10 @@
 
 A CRM for managing your teams. 
 
+## Wireframe
+
+![Desktop image](https://github.com/JordanBlount/teamly/blob/main/wireframes/desktop.png)
+
 ## Tech Stack
 
 **Client:** React, Redux, React Helmet, React Form Hooks, Material UI
