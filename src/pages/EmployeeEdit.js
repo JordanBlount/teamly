@@ -402,12 +402,12 @@ const EmployeeEdit = () => {
                 <DialogTitle>{"Delete this employee?"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description">
-                        Are you sure you would like to delete this employee.
+                        Are you sure you would like to delete this employee?
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Disagree</Button>
-                    <Button onClick={handleDelete}>Agree</Button>
+                    <Button onClick={handleClose}>No</Button>
+                    <Button onClick={handleDelete}>Yes</Button>
                 </DialogActions>
             </Dialog>
         </div>

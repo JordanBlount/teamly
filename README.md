@@ -1,6 +1,6 @@
 # Teamly
 
-A CRM for managing your teams. 
+A organization management tool for managing your teams. 
 
 ## Wireframe
 
